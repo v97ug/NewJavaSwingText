@@ -48,3 +48,79 @@ while(true){
 第３引数　：　表示するｙ座標
 
 注意点として、ここでいうxとｙは、左から数えてxピクセル、上から数えてｙピクセルという意味です。Swingは基準点が左上なので、気をつけてください。
+
+// TODO ふぉんと
+
+== 図形、画像の表示
+
+今度は、Graphicsクラスを使って図形を描いてみましょう。Graphicsクラスを使うと、線を引いたり四角形を描いたりできます。
+他にも背景の色を変更したり、見た目をいろいろと変更することができます。
+
+まず、以下のコードを実行してみましょう。while文の中を変えるだけですね。
+
+[source, java]
+----
+include::MyJPanel2.java[lines=5..-1]
+----
+
+実行結果：
+
+image::[CSSC2016]SwingSample3の実行結果.png[result2]
+
+それぞれのメソッドについて解説します。
+
+===  四角形を描く
+四角形を描くには、`drawRect`もしくは`fillRect`メソッドを使います。
+
+```java
+drawRect(x, y, width, height)
+fillRect(x, y, width, height)
+```
+
+`drawRect(x, y, width, height)`と指定すると、座標(x,y)を四角形の左上の頂点として、高さがheight、幅がwidthの長方形が描かれます。
+`drawRect`は四角形の外枠だけが描かれて、`fillRect`は中が塗りつぶされた四角形を描くことができます。
+
+=== 円を描く
+円を描くには、`drawOval`もしくは`fillOval`メソッドを使います。
+
+```java
+drawOval(x, y, width, height)
+fillOval(x, y, width, height)
+```
+
+`drawOval`メソッドは、座標（x,y）を左上とした、高さ`height`、幅`width`の四角形の中にすっぽり入る円を描くことができます。
+`fillOval`で、中が塗りつぶされた円を描くこともできます。
+
+image::drawOval.png[drawOval]
+
+===  角度を指定して、円（孤）を描く
+角度を指定して円を描くには、`drawArc`もしくは`fillArc`メソッドを使います。
+
+```java
+drawArc(x1, y1, x2, y2, arc1, arc2)
+fillArc(x1, y1, x2, y2, arc1, arc2)
+```
+
+`drawArc`メソッドは、座標(x1,y1）と（x2,y2）を対角線（右下がり）とする四角形の中にすっぽり入るような円が描けます。
+`arc1`と`arc2`で角度を指定すれば、arc1からarc2までの角度の扇型を描くことができます。例えば、0,360とすれば、一回転なので、ふつうの円が描けます。
+30,300とすれば、パックマンが出来上がります（笑）。
+
+=== 色を指定する
+描く図形の色を指定したい場合は、`setColor`を使います。
+
+```java
+setColor(Color.BLUE)
+```
+
+図形を描く前に、`setColor`を使えば、図形に色をつけられます。
+例えば、
+
+```java
+g.setColor(ColorBLUE)
+g.fillOval(0, 0, 100, 100)
+```
+
+とすれば、青色の円が描けると思います。
+
+//TODO 色の表
+//TODO new Color で厳密な色指定
