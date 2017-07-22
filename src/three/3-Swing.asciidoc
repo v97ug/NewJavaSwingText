@@ -12,16 +12,16 @@ Javaで作成するプログラムをアプリケーションといいます。�
 
 == Swing の基本スタイル
 
-今回は、このテンプレートを使って、ゲームを作っていきたいと思います。
+今回は、このテンプレートを使って、ゲームを作っていきたいと思います。まず、以下のコードを実行してみましょう。
 
 [source, java]
 ----
-include::MyJPanel.java[lines=2..-1]
+include::code/MyJPanel.java[lines=2..-1]
 ----
 
 実行結果：
 
-image::[CSSC2016]SwingSample1の実行結果.png[result1]
+image::img/[CSSC2016]SwingSample1の実行結果.png[result1]
 
 何もないウィンドウが表示されたと思います。Javaコースではこのウィンドウを使って、いろいろなアプリケーションを作っていくことになります。
 mainメソッドの中に、`height`と`width`という変数があると思いますが、これの変数は画面の縦横の大きさが格納されています。
