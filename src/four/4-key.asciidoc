@@ -30,7 +30,17 @@ Keyクラスが作れたところで、今度はこのクラスの使い方を�
 include::code/MyJPanel.java[lines=3..-1]
 ----
 
-1つずつ解説していきましょう。
+また、mainメソッドの中身も少しだけ追加します。終わりのほうに、`frame.addKeyListener(new Key());`を追加します。
+
+[source, java]
+----
+include::code/SwingSample1.java[lines=3..-1]
+----
+
+`addKeyListener`をしないと、キー操作を受け付けないので、追加し忘れないようにしましょう。
+
+ここまでくれば、プログラムがちゃんと実行できるようになると思います。
+
 
 === Keyクラスの使い方
 
