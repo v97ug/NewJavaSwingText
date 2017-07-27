@@ -18,16 +18,16 @@ public class MyJPanel extends JPanel{
             g.fillRect(0,0,width, height);
 
             if(Key.up){
-                y--;
+                y -= 5;
             }
             if(Key.down){
-                y++;
+                y += 5;
             }
             if(Key.right){
-                x++;
+                x += 5;
             }
             if(Key.left){
-                x--;
+                x -= 5;
             }
 
             //追加！
