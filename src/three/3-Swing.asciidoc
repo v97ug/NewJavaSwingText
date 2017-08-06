@@ -1,5 +1,6 @@
 :sectnums:
 :chapter-label:
+:source-highlighter: coderay
 
 = 第３章 Swing
 
@@ -21,10 +22,10 @@ include::code/MyJPanel.java[lines=2..-1]
 
 実行結果：
 
-image::img/[CSSC2016]SwingSample1の実行結果.png[result1]
+image::img/resultOfSwingSample1.png[scaledwidth="50%"]
 
 何もないウィンドウが表示されたと思います。Javaコースではこのウィンドウを使って、いろいろなアプリケーションを作っていくことになります。
-mainメソッドの中に、`height`と`width`という変数があると思いますが、これの変数は画面の縦横の大きさが格納されています。
+mainメソッドの中に、`height` と `width` という変数があると思いますが、これの変数は画面の縦横の大きさが格納されています。
 画面を大きさを変更したいときは、heightとwidthの値を変えてやれば、画面が大きくなったり小さくなったりします。
 
 
@@ -58,7 +59,7 @@ while(true){
 
 [source, java]
 ----
-include::code/MyJPanelString.java[lines=15..20]
+include::code/MyJPanelString.java[lines=12..17]
 ----
 
 
@@ -76,7 +77,7 @@ include::code/MyJPanel2.java[lines=5..-1]
 
 実行結果：
 
-image::img/[CSSC2016]SwingSample3の実行結果.png[result2]
+image::img/resultOfSwingSample3.png[scaledwidth="50%"]
 
 それぞれのメソッドについて解説します。
 
@@ -102,7 +103,7 @@ fillOval(x, y, width, height)
 `drawOval`メソッドは、座標（x,y）を左上とした、高さ`height`、幅`width`の四角形の中にすっぽり入る円を描くことができます。
 `fillOval`で、中が塗りつぶされた円を描くこともできます。
 
-image::img/drawOval.png[drawOval]
+image::img/drawOval.png[scaledwidth="50%"]
 
 ===  角度を指定して、円（孤）を描く
 角度を指定して円を描くには、`drawArc`もしくは`fillArc`メソッドを使います。
