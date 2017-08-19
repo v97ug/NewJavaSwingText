@@ -1,0 +1,74 @@
+:sectnums:
+:chapter-label:
+:toc: left
+:toc-title: 目次
+:toclevels: 2
+:source-highlighter: coderay
+
+== シーンを作る
+
+次に、タイトル画面を作りたいと思います。とりあえず、STARTとEXITがあればよいでしょう。
+
+image::img/six/title.png[]
+
+STARTを押せばゲームが開始され、EXITを押せばゲームが終了するようにします。
+
+=== タイトル画面を作る
+
+まず、タイトル画面を表示できるようにしましょう。
+
+[source, java]
+----
+include::code/six/MyJPanel.java[lines=2..-1]
+----
+
+=== キーで選択できるようにする
+
+次に、UpキーとDownキーでSTARTとEXITを選択できるようにしましょう。
+
+ここで、selectという変数を作ります。selectが0のとき、矢印がSTARTを指すようにして、selectが１のとき、矢印がEXITを指すようにします。
+
+selectの変数宣言は、classの宣言の下にかいておきましょう。
+
+[source, java]
+----
+include::code/six/MyJPanel2.java[lines=6..-1]
+----
+
+=== シーンの実装方法
+
+さて、タイトルからゲーム画面へ移るにはどうすればいいでしょうか。
+
+以下のようにしてみるのはどうでしょう。
+
+```java
+if(scene == 0) {
+   title(g); //タイトル
+}
+else if(scene == 1){
+    play(g); //ゲーム画面
+}
+```
+
+sceneという変数を作って、sceneが0のときタイトル画面を表示し、sceneが１のときゲーム画面を表示するようにします。
+
+こうすれば、STARTを選択したときにsceneの値を１にすれば、ゲーム画面に移れますね。
+
+ではまず、「STARTを選択したとき、sceneの値を１にする」という処理を実装してみましょう。titleメソッドの最後のほうに追加します。
+
+[source, java]
+----
+include::code/six/MyJPanel3.java[lines=39..71]
+----
+
+あとは、sceneの宣言をしたり、playメソッドの中に先ほど作ったプレイヤーを動かすコードをコピペすればOKです。
+
+これが完成形のコードです。
+
+[source, java]
+----
+include::code/six/MyJPanel3.java[lines=2..-1]
+----
+
+//=== Enumを使ってみる
+
