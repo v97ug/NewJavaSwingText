@@ -70,5 +70,50 @@ include::code/six/MyJPanel3.java[lines=39..71]
 include::code/six/MyJPanel3.java[lines=2..-1]
 ----
 
-//=== Enumを使ってみる
+=== Enumを使ってみる
 
+よりバグを少なくするために、Enumというものを紹介したいと思います。
+
+先ほどのコードが、もしこんなかき方をされていたらどうなるでしょう？
+
+```java
+if(Key.enter && select == 0){
+    scene = 1;
+}
+else if(Key.enter && select == 1){
+    scene = 1; //ここ注目！
+}
+```
+
+１つめのif文の中身は、sceneに１を代入しています。しかし、２つめでもsceneに１を代入しちゃっていますね。
+
+もしsceneに、「タイトルscene」や「プレイscene」のような意味を持ったものを代入したりできたらいいですよね。実はこの場合にぴったりのもの、**Enum（列挙型）**があります。
+
+Enumを使うと以下のようにかけます。
+
+```java
+if(Key.enter && select == 0){
+    scene = Scene.PLAY;
+}
+else if(Key.enter && select == 1){
+    scene = Scene.EXIT;
+}
+```
+
+こうすればもう間違えることはありません！
+
+Enumの作り方は、クラスの作り方と似ています。srcのフォルダを右クリックして、``New -> Enum``を選択します。ファイル名は、Sceneとしておきましょう。
+
+定義は以下のようにしましょう。
+
+[source, java]
+----
+include::code/six/Scene.java[lines=2..-1]
+----
+
+あとは、ところどころ変更していきましょう。以下が全体のコードです。
+
+[source, java]
+----
+include::code/six/MyJPanel4.java[lines=2..-1]
+----

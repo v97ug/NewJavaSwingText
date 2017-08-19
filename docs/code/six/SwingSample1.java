@@ -13,7 +13,7 @@ public class SwingSample1 {
         frame.setSize(width, height);
         frame.setVisible(true);
 
-        MyJPanel3 myJPanel = new MyJPanel3();
+        MyJPanel4 myJPanel = new MyJPanel4();
         frame.getContentPane().add(myJPanel);
 
         myJPanel.setBounds(0,0, width, height);

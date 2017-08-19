@@ -526,6 +526,7 @@ table.CodeRay td.code>pre{padding:0}
 <li><a href="#_タイトル画面を作る">1.1. タイトル画面を作る</a></li>
 <li><a href="#_キーで選択できるようにする">1.2. キーで選択できるようにする</a></li>
 <li><a href="#_シーンの実装方法">1.3. シーンの実装方法</a></li>
+<li><a href="#_enumを使ってみる">1.4. Enumを使ってみる</a></li>
 </ul>
 </li>
 </ul>
@@ -807,12 +808,151 @@ table.CodeRay td.code>pre{padding:0}
 </div>
 </div>
 </div>
+<div class="sect2">
+<h3 id="_enumを使ってみる">1.4. Enumを使ってみる</h3>
+<div class="paragraph">
+<p>よりバグを少なくするために、Enumというものを紹介したいと思います。</p>
+</div>
+<div class="paragraph">
+<p>先ほどのコードが、もしこんなかき方をされていたらどうなるでしょう？</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="keyword">if</span>(<span class="predefined-type">Key</span>.enter &amp;&amp; select == <span class="integer">0</span>){
+    scene = <span class="integer">1</span>;
+}
+<span class="keyword">else</span> <span class="keyword">if</span>(<span class="predefined-type">Key</span>.enter &amp;&amp; select == <span class="integer">1</span>){
+    scene = <span class="integer">1</span>; <span class="comment">//ここ注目！</span>
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>１つめのif文の中身は、sceneに１を代入しています。しかし、２つめでもsceneに１を代入しちゃっていますね。</p>
+</div>
+<div class="paragraph">
+<p>もしsceneに、「タイトルscene」や「プレイscene」のような意味を持ったものを代入したりできたらいいですよね。実はこの場合にぴったりのもの、<strong>Enum（列挙型）</strong>があります。</p>
+</div>
+<div class="paragraph">
+<p>Enumを使うと以下のようにかけます。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="keyword">if</span>(<span class="predefined-type">Key</span>.enter &amp;&amp; select == <span class="integer">0</span>){
+    scene = Scene.PLAY;
+}
+<span class="keyword">else</span> <span class="keyword">if</span>(<span class="predefined-type">Key</span>.enter &amp;&amp; select == <span class="integer">1</span>){
+    scene = Scene.EXIT;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>こうすればもう間違えることはありません！</p>
+</div>
+<div class="paragraph">
+<p>Enumの作り方は、クラスの作り方と似ています。srcのフォルダを右クリックして、<code>New &#8594; Enum</code>を選択します。ファイル名は、Sceneとしておきましょう。</p>
+</div>
+<div class="paragraph">
+<p>定義は以下のようにしましょう。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">enum</span> Scene {
+    TITLE,
+    PLAY,
+    EXIT
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>あとは、ところどころ変更していきましょう。以下が全体のコードです。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="keyword">import</span> <span class="include">javax.swing</span>.*;
+<span class="keyword">import</span> <span class="include">java.awt</span>.*;
+
+<span class="directive">public</span> <span class="type">class</span> <span class="class">MyJPanel4</span> <span class="directive">extends</span> <span class="predefined-type">JPanel</span> {
+    <span class="type">int</span> select = <span class="integer">0</span>;
+    Scene scene = Scene.TITLE; <span class="comment">//変更</span>
+    Player player = <span class="keyword">new</span> Player(<span class="integer">0</span>,<span class="integer">0</span>);
+
+    <span class="directive">public</span> <span class="type">void</span> game(<span class="type">int</span> width, <span class="type">int</span> height) {
+        <span class="predefined-type">Image</span> img = createImage(width, height);
+        <span class="predefined-type">Graphics</span> g = img.getGraphics();
+        <span class="predefined-type">Graphics</span> wg = getGraphics();
+
+        setBackground(<span class="predefined-type">Color</span>.white);
+
+        <span class="keyword">while</span> (<span class="predefined-constant">true</span>) {
+            <span class="keyword">if</span>(scene == Scene.TITLE) { <span class="comment">//変更</span>
+                title(g);
+            }
+            <span class="keyword">else</span> <span class="keyword">if</span>(scene == Scene.PLAY){ <span class="comment">//変更</span>
+                play(g);
+            }
+            <span class="keyword">else</span> <span class="keyword">if</span>(scene == Scene.EXIT){ <span class="comment">//変更</span>
+                <span class="predefined-type">System</span>.exit(<span class="integer">0</span>);
+            }
+
+            wg.drawImage(img, <span class="integer">0</span>, <span class="integer">0</span>, <span class="predefined-constant">null</span>);
+            <span class="keyword">try</span> {
+                <span class="predefined-type">Thread</span>.sleep(<span class="integer">10</span>);
+            } <span class="keyword">catch</span> (<span class="exception">InterruptedException</span> e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    <span class="directive">public</span> <span class="type">void</span> title(<span class="predefined-type">Graphics</span> g) {
+        g.setColor(<span class="predefined-type">Color</span>.WHITE);
+        g.fillRect(<span class="integer">0</span>, <span class="integer">0</span>, <span class="integer">800</span>, <span class="integer">600</span>);
+
+        g.setColor(<span class="predefined-type">Color</span>.lightGray);
+        g.setFont(<span class="keyword">new</span> <span class="predefined-type">Font</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">Arial</span><span class="delimiter">&quot;</span></span>, <span class="predefined-type">Font</span>.BOLD, <span class="integer">12</span>));
+
+        <span class="keyword">if</span>(select == <span class="integer">0</span>) {
+            g.drawString(<span class="string"><span class="delimiter">&quot;</span><span class="content">→</span><span class="delimiter">&quot;</span></span>, <span class="integer">280</span>, <span class="integer">425</span>);
+            g.drawString(<span class="string"><span class="delimiter">&quot;</span><span class="content">START</span><span class="delimiter">&quot;</span></span>, <span class="integer">325</span>, <span class="integer">425</span>);
+            g.drawString(<span class="string"><span class="delimiter">&quot;</span><span class="content">EXIT</span><span class="delimiter">&quot;</span></span>, <span class="integer">325</span>, <span class="integer">500</span>);
+        }
+        <span class="keyword">else</span> <span class="keyword">if</span>(select == <span class="integer">1</span>){
+            g.drawString(<span class="string"><span class="delimiter">&quot;</span><span class="content">→</span><span class="delimiter">&quot;</span></span>, <span class="integer">280</span>, <span class="integer">500</span>);
+            g.drawString(<span class="string"><span class="delimiter">&quot;</span><span class="content">START</span><span class="delimiter">&quot;</span></span>, <span class="integer">325</span>, <span class="integer">425</span>);
+            g.drawString(<span class="string"><span class="delimiter">&quot;</span><span class="content">EXIT</span><span class="delimiter">&quot;</span></span>, <span class="integer">325</span>, <span class="integer">500</span>);
+        }
+
+        <span class="keyword">if</span>(<span class="predefined-type">Key</span>.up){
+            select = <span class="integer">0</span>;
+        }
+        <span class="keyword">else</span> <span class="keyword">if</span>(<span class="predefined-type">Key</span>.down){
+            select = <span class="integer">1</span>;
+        }
+
+        <span class="keyword">if</span>(<span class="predefined-type">Key</span>.enter &amp;&amp; select == <span class="integer">0</span>){
+            scene = Scene.PLAY; <span class="comment">//変更</span>
+        }
+        <span class="keyword">else</span> <span class="keyword">if</span>(<span class="predefined-type">Key</span>.enter &amp;&amp; select == <span class="integer">1</span>){
+            scene = Scene.EXIT; <span class="comment">//変更</span>
+        }
+    }
+
+    <span class="directive">public</span> <span class="type">void</span> play(<span class="predefined-type">Graphics</span> g){
+        g.setColor(<span class="predefined-type">Color</span>.WHITE);
+        g.fillRect(<span class="integer">0</span>, <span class="integer">0</span>, <span class="integer">800</span>, <span class="integer">600</span>);
+
+        player.move();
+        player.draw(g);
+    }
+}</code></pre>
+</div>
+</div>
+</div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-08-19 19:28:39 JST
+Last updated 2017-08-19 19:56:45 JST
 </div>
 </div>
 </body>
