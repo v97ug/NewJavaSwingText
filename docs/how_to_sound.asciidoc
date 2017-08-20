@@ -1,0 +1,31 @@
+## 音の鳴らし方
+
+とりあえず、新たにSoundクラスを作って、以下のコードをコピペしましょう。
+
+[source, java]
+----
+include::code/sound/Sound.java[lines=2..-1]
+----
+
+そして、音を鳴らしたいところで、以下のようにすると音がなると思います。
+
+[source, java]
+----
+include::code/sound/MyJPanel.java[lines=2..-1]
+----
+
+Soundクラスのインスタンスを作る時、再生したいファイルの名前（もしくは場所）を指定します。
+
+```java
+Sound sound = new Sound("history_main_off.wav");
+```
+
+そして、音楽を再生したいところで以下のようにかけば、音楽が再生されます。
+
+```java
+sound.play();
+```
+
+sound.play()は、再生ボタンを押すようなイメージです。
+
+なお、再生できるファイル形式は、WAVE, AU, AIFFです。
