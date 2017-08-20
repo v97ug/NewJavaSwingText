@@ -13,3 +13,10 @@ https://v97ug.github.io/NewJavaSwingText/index.html
 
 https://v97ug.github.io/NewJavaSwingText/6_scene.html
 
+## 音の鳴らし方
+
+https://v97ug.github.io/NewJavaSwingText/how_to_sound.html
+
+## キーを押し続けても、一回だけ判定する
+
+https://v97ug.github.io/NewJavaSwingText/keydown.html
