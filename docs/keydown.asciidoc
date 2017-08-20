@@ -1,0 +1,38 @@
+:sectnums:
+:chapter-label:
+:toc: left
+:toc-title: 目次
+:toclevels: 2
+:source-highlighter: coderay
+
+== キーを押し続けても、一回だけ判定する
+
+まず選択項目を１個追加して、Keyクラスを試してみましょう。
+
+[source, java]
+----
+include::code/keydown/MyJPanel.java[lines=5..-1]
+----
+
+Downキーを押すと、一瞬でSTARTからEXITまでいってしまいます。
+Keyクラスでは、キーを押している間ずっと値がtrueになっています。つまり、キーを連打しているような状態ですね。
+
+キーを押し続けても、一回だけ押されたことにするにはどうすればいいでしょう。
+
+=== KeyDownクラスを作る
+
+以下のKeyDownクラスはどうでしょうか。
+
+[source, java]
+----
+include::code/keydown/KeyDown.java[lines=2..-1]
+----
+
+そして、titleメソッドを以下のように変更しましょう。
+
+[source, java]
+----
+include::code/keydown/MyJPanel.java[lines=36..67]
+----
+
+
