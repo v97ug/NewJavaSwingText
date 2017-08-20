@@ -1,3 +1,10 @@
+:sectnums:
+:chapter-label:
+:toc: left
+:toc-title: 目次
+:toclevels: 2
+:source-highlighter: coderay
+
 ## 音の鳴らし方
 
 とりあえず、新たにSoundクラスを作って、以下のコードをコピペしましょう。
